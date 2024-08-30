@@ -18,7 +18,7 @@ export default async ({ req, res, log, error }) => {
 
   // You can log messages to the console
   log('Hello, Logs!');
-  logAppwrite("Hello, Logs!");
+  await logAppwrite("Hello, Logs!");
   // If something goes wrong, log an error
   error('Hello, Errors!');
   
