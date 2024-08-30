@@ -15,12 +15,24 @@ export default async ({ req, res, log, error }) => {
   const sensorCollectionID = process.env.SENSOR_COLLECTION_ID;
   const mqtt_url =  process.env.MQTT_URL;
   const mqtt_applicationID = process.env.MQTT_APPLICATION_ID;
+  const logCollectionId = "66d18cd100349aec7523";
 
   // You can log messages to the console
   log('Hello, Logs!');
   await logAppwrite("Hello, Logs!");
   // If something goes wrong, log an error
   error('Hello, Errors!');
+
+  try {
+    await databases.createDocument(buildingDatabaseID, logCollectionId, ID.unique(), {
+      log: "test",
+      time: new Date().toISOString(),
+      type: "MQTT_AppWrite"
+    });
+    log('Log ooke');
+  } catch (error) {
+    error('Log not ooke');
+  }
   
 
   // The `req` object contains the request data
@@ -39,17 +51,5 @@ export default async ({ req, res, log, error }) => {
   });
 };
 
-const logCollectionId = "66d18cd100349aec7523";
+
 // Write a function for input is String of Log, and output is a new document in Log Collection
-async function logAppwrite(log) {
-  try {
-    await databases.createDocument(buildingDatabaseID, logCollectionId, ID.unique(), {
-      log: log,
-      time: new Date().toISOString(),
-      type: "MQTT_AppWrite"
-    });
-    log('Log ooke');
-  } catch (error) {
-    error('Log not ooke');
-  }
-}
