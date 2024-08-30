@@ -6,40 +6,34 @@ export default async ({ req, res, log, error }) => {
   // Why not try the Appwrite SDK?
   //
   let client = new Client();
-  client.setEndpoint(process.env.ENDPOINT_URL)
-      .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-      .setKey(process.env.APPWRITE_API_KEY)
-      .setSession('');
+  client.setEndpoint('https://167.179.68.203/v1')
+      .setProject("66c2dba00021e2c89583")
+      .setKey('7845980fd5b3722f268a44412de0290774776a9037e7cd4cf20890adac680fae6d55ecd9e02f7e2930c67b2d25a248647ce3d95d74cd6269150ac3c8c38628b873dea9fbe6c44835be16b75cc6404a6dd3de40a2628672c05528d73db18234837fc0dfcdaa2a2c3c81868b6299d1bff80f9f2fbfedd17ecdbc8a3ddd0c24fa2e');
   
   const databases = new Databases(client);
-  const buildingDatabaseID = process.env.BUILDING_DATABASE_ID;
-  const sensorCollectionID = process.env.SENSOR_COLLECTION_ID;
-  const mqtt_url =  process.env.MQTT_URL;
-  const mqtt_applicationID = process.env.MQTT_APPLICATION_ID;
-  const logCollectionId = "66d18cd100349aec7523";
+  const buildingDatabaseID = '66c2f1480035f5ecec60';
+  const logCollectionId = '66d18cd100349aec7523';
 
   // You can log messages to the console
   log('Hello, Logs!');
   error('Hello, Errors!');
 
   try {
-    await databases.createDocument(buildingDatabaseID, logCollectionId, "123123123zxczx", {
-      log: "test",
-      time: new Date().toISOString(),
-      type: "MQTT_AppWrite"
-    });
+    await databases.createDocument(
+      buildingDatabaseID, 
+      logCollectionId, 
+      ID.unique(), 
+      {
+        log: "test",
+        time: new Date().toISOString(),
+        type: "MQTT_AppWrite"
+      }
+    );
     log('create ooke');
   } catch (r) {
     error(`create not okke ${r}`);
   }
   
-
-  // The `req` object contains the request data
-  if (req.method === 'GET') {
-    // Send a response with the res object helpers
-    // `res.send()` dispatches a string back to the client
-    return res.send('Hello, World!');
-  }
 
   // `res.json()` is a handy helper for sending JSON
   return res.json({
