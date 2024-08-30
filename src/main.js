@@ -1,5 +1,5 @@
-import { ID } from 'node-appwrite';
-const sdk = require('node-appwrite');
+import { ID, sdk, Client, Database } from 'node-appwrite';
+// const sdk = require('node-appwrite');
 
 // This is your Appwrite function
 // It's executed each time we get a request
