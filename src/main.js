@@ -27,9 +27,9 @@ export default async ({ req, res, log, error }) => {
       time: new Date().toISOString(),
       type: "MQTT_AppWrite"
     });
-    log('Log ooke');
-  } catch (error) {
-    error('Log not ooke');
+    log('create ooke');
+  } catch (r) {
+    error(`create not okke ${r}`);
   }
   
 
