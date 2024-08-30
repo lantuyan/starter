@@ -1,18 +1,17 @@
-import { sdk } from 'node-appwrite';
-// const sdk = require('node-appwrite');
+import { Client, Databases, ID } from 'node-appwrite';
 
 // This is your Appwrite function
 // It's executed each time we get a request
 export default async ({ req, res, log, error }) => {
   // Why not try the Appwrite SDK?
   //
-  const client = new sdk.Client()
+  let client = new Client();
   client.setEndpoint(process.env.ENDPOINT_URL)
       .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
       .setKey(process.env.APPWRITE_API_KEY)
+      .setSession('');
   
-  const databases = new sdk.Databases(client);
-
+  const databases = new Databases(client);
   const buildingDatabaseID = process.env.BUILDING_DATABASE_ID;
   const sensorCollectionID = process.env.SENSOR_COLLECTION_ID;
   const mqtt_url =  process.env.MQTT_URL;
@@ -24,7 +23,7 @@ export default async ({ req, res, log, error }) => {
   error('Hello, Errors!');
 
   try {
-    await databases.createDocument(buildingDatabaseID, logCollectionId, "asdkjasd12", {
+    await databases.createDocument(buildingDatabaseID, logCollectionId, "123123123zxczx", {
       log: "test",
       time: new Date().toISOString(),
       type: "MQTT_AppWrite"
