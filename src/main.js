@@ -1,4 +1,4 @@
-import { Client, Databases } from 'node-appwrite';
+import { Client, Databases, ID } from 'node-appwrite';
 
 // This is your Appwrite function
 // It's executed each time we get a request
@@ -50,4 +50,3 @@ export default async ({ req, res, log, error }) => {
 };
 
 
-// Write a function for input is String of Log, and output is a new document in Log Collection
