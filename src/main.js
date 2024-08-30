@@ -13,10 +13,21 @@ export default async ({ req, res, log, error }) => {
   const databases = new Databases(client);
   const buildingDatabaseID = '66c2f1480035f5ecec60';
   const logCollectionId = '66d18cd100349aec7523';
+  const sensorCollectionID = '66d18c8b00349aec7521';
 
   // You can log messages to the console
   log('Hello, Logs!');
   error('Hello, Errors!');
+
+  try {
+    const logs = await databases.listDocuments(
+      buildingDatabaseID,
+      logCollectionId
+    );
+    log(logs);
+  } catch (r) {
+    log(`list documents ${r}`);
+  }
 
   try {
     await databases.createDocument(
